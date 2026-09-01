@@ -49,10 +49,59 @@
     const monthLabel=d=>`${d.getFullYear()}년 ${d.getMonth()+1}월`;
     const weekLabel=d=>`${Math.ceil((d.getDate()+new Date(d.getFullYear(),d.getMonth(),1).getDay())/7)}주차`;
     function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-    function lineParts(line){let text=line.trim();let level=0,bullet=false,additional=false;if(text.startsWith('+)' )){additional=true;text=text.slice(2).trim();}while(text.startsWith('>')){level++;text=text.slice(1).trim();}if(text.startsWith('- ')){bullet=true;text=text.slice(2).trim();}return {text,level:Math.min(level,2),bullet,additional};}
-    function titleFrom(text){const cleaned=text.replace(/^#+\s*/,'').trim();const colon=cleaned.search(/[:：]/);if(colon>0&&colon<=30)return [cleaned.slice(0,colon+1),cleaned.slice(colon+1).trim()];const dash=cleaned.search(/\s[-–]\s/);if(dash>0&&dash<=34)return [cleaned.slice(0,dash+3),cleaned.slice(dash+3).trim()];const comma=cleaned.indexOf(',');if(comma>0&&comma<=24)return [cleaned.slice(0,comma+1),cleaned.slice(comma+1).trim()];const words=cleaned.split(/\s+/);if(words.length>8)return [words.slice(0,Math.min(4,words.length)).join(' '),words.slice(Math.min(4,words.length)).join(' ')];return [cleaned,''];}
-    function pushLine(container, part){if(!part.text)return;const p=document.createElement('p');p.className=`diary-line level-${part.level}${part.bullet?' bullet':''}`;p.textContent=part.text;container.appendChild(p);}
-    function formatCore(raw){const wrap=document.createElement('div');wrap.className='formatted-core';let block=null,lines=null;const openBlock=(part)=>{block=document.createElement('section');block.className='diary-block'+(part.additional?' additional':'');const h=document.createElement('h4');h.className='block-title';if(part.additional){const label=document.createElement('span');label.className='additional-label';label.textContent='추가 메모';h.appendChild(label);}const [t,rest]=titleFrom(part.text);const strong=document.createElement('strong');strong.textContent=t;h.appendChild(strong);if(rest)h.append(' '+rest);block.appendChild(h);lines=document.createElement('div');lines.className='diary-lines';block.appendChild(lines);wrap.appendChild(block);};String(raw).split(/\n+/).map(lineParts).forEach(part=>{if(!part.text)return;const startsBlock=part.additional||part.bullet||part.level===0||/^#+/.test(part.text);if(startsBlock)openBlock(part);else {if(!block)openBlock({text:'메모',additional:false});pushLine(lines,part);}});return wrap;}
+    function lineParts(line){
+      let text=line.trim();
+      let level=0,kind='text',additional=false;
+      if(text.startsWith('+)' )){additional=true;kind='additional';text=text.slice(2).trim();}
+      if(!additional&&text.startsWith('- ')){kind='section';text=text.slice(2).trim();}
+      while(!additional&&text.startsWith('>')){level++;text=text.slice(1).trim();}
+      if(!additional&&text.startsWith('*')){kind='comment';text=text.replace(/^\*+\s*/,'').trim();}
+      if(!additional&&text.startsWith('->')){kind='comment';text=text.slice(2).trim();}
+      return {text,level:Math.min(level,2),kind,additional};
+    }
+    function titleFrom(text){
+      const cleaned=text.replace(/^#+\s*/,'').trim();
+      const colon=cleaned.search(/[:：]/);
+      if(colon>0&&colon<=34)return [cleaned.slice(0,colon+1),cleaned.slice(colon+1).trim()];
+      const comma=cleaned.indexOf(',');
+      if(comma>0&&comma<=28)return [cleaned.slice(0,comma+1),cleaned.slice(comma+1).trim()];
+      return [cleaned,''];
+    }
+    function pushLine(container, part){
+      if(!part.text)return;
+      const p=document.createElement('p');
+      p.className=`diary-line level-${part.level}${part.kind==='comment'?' comment':''}`;
+      p.textContent=part.text;
+      container.appendChild(p);
+    }
+    function openBlock(wrap, part){
+      const block=document.createElement('section');
+      block.className='diary-block'+(part.additional?' additional':'');
+      const h=document.createElement('h4');
+      h.className='block-title';
+      if(part.additional){const label=document.createElement('span');label.className='additional-label';label.textContent='추가 메모';h.appendChild(label);}
+      const [t,rest]=titleFrom(part.text);
+      const strong=document.createElement('strong');strong.textContent=t;h.appendChild(strong);
+      if(rest)h.append(' '+rest);
+      block.appendChild(h);
+      const lines=document.createElement('div');lines.className='diary-lines';block.appendChild(lines);
+      wrap.appendChild(block);
+      return {block,lines};
+    }
+    function formatCore(raw){
+      const wrap=document.createElement('div');wrap.className='formatted-core';
+      let current=null;
+      String(raw).split(/\n+/).map(lineParts).forEach(part=>{
+        if(!part.text)return;
+        if(part.kind==='section'||part.additional||(!current&&part.level===0)){
+          current=openBlock(wrap,part);
+          return;
+        }
+        if(!current)current=openBlock(wrap,{text:'메모',additional:false});
+        pushLine(current.lines,part);
+      });
+      return wrap;
+    }
     function filtered(){const needle=q.trim().toLowerCase();if(!needle)return diaries.map((d,i)=>({...d,i}));return diaries.map((d,i)=>({...d,i})).filter(d=>`${d.date} ${d.title} ${d.core}`.toLowerCase().includes(needle));}
     function grouped(){return filtered().reduce((acc,d)=>{const dt=parseDate(d.sortDate),m=monthLabel(dt),w=weekLabel(dt);(acc[m]??={})[w]??=[];acc[m][w].push(d);return acc;},{})}
     function show(i){active=i;const d=diaries[i],dt=parseDate(d.sortDate);$('meta').textContent=`${monthLabel(dt)} · ${weekLabel(dt)} · ${d.date}`;$('title').textContent=d.title;$('body').innerHTML='';if(d.core){const section=document.createElement('section');section.className='note';const h=document.createElement('h3');h.textContent='핵심 내용';section.appendChild(h);section.appendChild(formatCore(d.core));$('body').appendChild(section);}else {$('body').innerHTML='<p class="empty">이 행은 원본 시트의 핵심 내용이 비어 있습니다.</p>';}render();$('article').scrollIntoView({behavior:'smooth',block:'start'})}
