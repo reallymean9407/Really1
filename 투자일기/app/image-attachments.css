@@ -1,0 +1,46 @@
+.image-attachments-editor { margin-top: 2px; }
+.attachment-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; color: #65765b; font-size: 11px; }
+.attachment-heading > div { display: flex; align-items: center; gap: 6px; }
+.attachment-heading svg { color: #8a9c7a; }
+.attachment-heading small { margin-left: 2px; color: #a5af9c; font-size: 9px; font-weight: 400; }
+.attachment-count { color: #6c825b; font-size: 11px; font-weight: 600; }
+.attachment-count > span { margin-left: 4px; color: #a5af9c; font-size: 10px; font-weight: 400; }
+.image-attachments-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 11px; }
+.editor-attachments-grid { margin-bottom: 12px; }
+.attachment-item { min-width: 0; position: relative; }
+.attachment-preview { display: block; position: relative; aspect-ratio: 4 / 3; overflow: hidden; border: 1px solid #e2e8d9; border-radius: 7px; background: #f4f6ef; }
+.attachment-preview > img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .2s ease; }
+.attachment-preview:hover > img { transform: scale(1.025); }
+.attachment-preview:focus-visible { outline: 3px solid #8eb79b; outline-offset: 3px; }
+.attachment-preview-open { position: absolute; right: 6px; bottom: 6px; display: inline-flex; align-items: center; gap: 3px; border-radius: 4px; padding: 3px 5px; background: #fffef9ed; color: #687d58; font-size: 8px; line-height: 1.4; box-shadow: 0 1px 5px #38462b0a; }
+.attachment-preview-open svg { width: 12px; height: 12px; }
+.attachment-preview-fallback { display: flex; width: 100%; height: 100%; flex-direction: column; align-items: center; justify-content: center; gap: 7px; padding: 12px; color: #9aa88c; font-size: 10px; }
+.attachment-caption { display: flex; align-items: center; gap: 5px; padding: 5px 1px 0; color: #8d9a82; font-size: 9px; line-height: 1.6; }
+.attachment-caption > span { display: block; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.attachment-caption > small { flex-shrink: 0; color: #b0b8a7; font-size: 8px; }
+.attachment-remove { position: absolute; z-index: 1; top: 5px; right: 5px; display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 1px solid #e1e7d8; border-radius: 50%; color: #7f8f71; background: #fffef8f5; box-shadow: 0 1px 5px #38462b0c; }
+.attachment-remove:hover:not(:disabled) { border-color: #d5beb5; color: #a27265; background: #fff5f0; }
+.attachment-file-input { display: none !important; }
+.attachment-picker { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 49px; width: 100%; padding: 12px 13px; border: 1px dashed #cbd8be; border-radius: 7px; background: #fafbf6; color: #718764; font-size: 11px; line-height: 1.5; }
+.attachment-picker > small { margin-left: 2px; color: #a3b094; font-size: 9px; }
+.attachment-picker:hover:not(:disabled) { border-color: #93ad7f; background: #f0f5e9; color: #4f6b40; }
+.attachment-picker:disabled { opacity: .65; }
+.attachment-help { margin: 8px 0 0; color: #a4ae99; font-size: 9px; line-height: 1.8; }
+.attachment-status { margin: 7px 0 0; color: #7b9368; font-size: 10px; line-height: 1.8; }
+.attachment-error { margin-top: 9px; padding: 9px 11px; border: 1px solid #ebd8cf; border-radius: 6px; background: #fff6f0; color: #a77764; font-size: 10px; line-height: 1.8; overflow-wrap: anywhere; }
+.diary-images { margin: 16px 0 14px; }
+.diary-images-heading { display: flex; align-items: center; gap: 5px; margin-bottom: 8px; color: #91a080; font-size: 9px; }
+.diary-images-heading > small { margin-left: 3px; color: #b1baaa; font-size: 8px; }
+.history-item .diary-images { margin-top: 12px; }
+@media (max-width: 540px) {
+  .image-attachments-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  .attachment-heading { margin-bottom: 9px; }
+  .attachment-picker { min-height: 47px; font-size: 10px; }
+  .attachment-preview-open { font-size: 8px; }
+  .attachment-remove { width: 30px; height: 30px; }
+  .diary-images { margin-top: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .attachment-preview > img { transition: none; }
+  .attachment-preview:hover > img { transform: none; }
+}

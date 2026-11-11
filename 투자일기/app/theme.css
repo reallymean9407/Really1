@@ -1,0 +1,211 @@
+/* Warm ivory and stone surfaces with quiet taupe accents. */
+:root {
+  --background: #f8f3f0;
+  --foreground: #433e39;
+  --card: #fffaf6;
+  --card-foreground: #433e39;
+  --primary: #746354;
+  --primary-foreground: #fffaf6;
+  --secondary: #ece6df;
+  --secondary-foreground: #514a43;
+  --muted: #ece6df;
+  --muted-foreground: #777069;
+  --accent: #dfd3c6;
+  --accent-foreground: #514a43;
+  --border: #dfd6ce;
+  --input: #d9cec5;
+  --ring: #94806e;
+  --ink: #433e39;
+  --text: #615b55;
+  --light-text: #777069;
+  --sidebar: #eee7df;
+  --sidebar-foreground: #61584f;
+  --sidebar-primary: #dfd3c6;
+  --sidebar-primary-foreground: #433e39;
+  --sidebar-accent: #e5dcd2;
+  --sidebar-border: #dbd0c4;
+  --green: #746354;
+  --green-soft: #eee7df;
+}
+.app { background: var(--background); color: var(--ink); }
+.app .sidebar { background: var(--sidebar); color: var(--sidebar-foreground); border-color: var(--sidebar-border); }
+.app .sidebar .brand-name, .app .sidebar .brand-en, .app .sidebar .brand { color: var(--ink); }
+.app .sidebar .brand-mark, .app .mobile-brand .brand-mark {
+  background: var(--accent); color: var(--ink); border-color: transparent;
+}
+.app .sidebar .nav-label, .app .sidebar .sidebar-note small, .app .sidebar .profile-text span { color: #83786d; }
+.app .sidebar .nav button, .app .sidebar .sidebar-note, .app .sidebar .profile-text strong,
+.app .sidebar .profile-shortcut { color: #61584f; }
+.app .sidebar .nav button:hover, .app .sidebar .profile-shortcut:hover { background: var(--sidebar-accent); }
+.app .sidebar .nav button.active { color: var(--ink); background: var(--accent); }
+.app .sidebar .sidebar-note, .app .sidebar .sidebar-bottom { border-color: var(--sidebar-border); }
+.app .sidebar .nav button small { color: inherit; }
+.app .topbar { background: var(--background); border-color: var(--border); color: var(--text); }
+.app .topbar .breadcrumbs b, .app .mobile-brand, .app .page-heading h1 { color: var(--ink); }
+.app .page-heading p, .app .topbar-right, .app .eyebrow { color: var(--light-text); }
+.app .page-heading h1 { font-family: Georgia, "Noto Sans KR", serif; line-height: 1.3; }
+.app .primary { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
+.app .primary:hover { background: #625244; }
+.app .secondary, .app .icon-button {
+  background: var(--secondary); border-color: var(--border); color: var(--ink);
+}
+.app .secondary:hover, .app .icon-button:hover { background: #e2dad1; }
+.app .stat-card, .app .mood-panel, .app .aside-card, .app .ranking-note, .app .favorites-intro,
+.app .review-card, .app .profile-card, .app .empty {
+  background: var(--secondary); border-color: var(--border);
+}
+.app .diary-card, .app .modal { background: var(--card); border-color: var(--border); }
+.app .diary-card { border-left-color: var(--sentiment); }
+.app .diary-card h2, .app .public-diary-title, .app .section-name, .app .community-section-heading h2,
+.app .aside-title, .app .stat-value, .app .ranking-note strong, .app .mood-total strong,
+.app .emotion-total strong, .app .post-detail h2, .app .empty h3, .app .modal h2 { color: var(--ink); }
+.app .public-diary-excerpt, .app .community-section-heading p, .app .helper, .app .chart-footnote,
+.app .stat-label, .app .stat-footer, .app .toolbar-info, .app .aside-note, .app .empty p { color: var(--text); }
+.app .diary-card .public-card-bottom, .app .entry-timestamps, .app .footer { color: var(--light-text); }
+.app .cash-target, .app .filters, .app .public-card-bottom, .app .modal-header, .app .modal-footer { border-color: var(--border); }
+.app .cash-target-row b { color: var(--ink); }
+.app input:not([type="range"]), .app textarea, .app select { color: var(--ink); border-color: var(--input); }
+.app :is(button,a,input,select,textarea):focus-visible { outline-color: var(--ring); }
+.app .text-btn, .app .public-diary-read-link { color: var(--ink); }
+.app .avatar, .app .community-avatar, .app .subtle-badge, .app .stat-icon {
+  background: #ebe3d9; color: var(--ink); border-color: #ded3c7;
+}
+.app .segmented { background: #e7e0d8; }
+.app .segmented button { color: var(--ink); }
+.app .segmented button.active, .app .visibility-options button.selected {
+  background: var(--accent); color: var(--ink); border-color: #ad9985;
+}
+.app .favorite-toggle.is-favorite { color: #79520e; }
+.app .home-top-diary {
+  background: #eee8e1; border: 1px solid var(--border); border-radius: 14px; padding: 19px 20px;
+}
+.app .home-top-diary > .community-section-heading h2 { color: var(--ink); }
+.app .home-top-diary > .community-section-heading p { color: var(--light-text); }
+.app .home-top-diary > .community-section-heading .text-btn {
+  background: #e3d9cd; color: #65584d; border-radius: 6px; padding: 6px 10px;
+}
+.app .home-top-diary > .loading { color: #61584f; }
+.app .home-top-diary .diary-card { margin-bottom: 0; }
+
+@media (max-width: 760px) {
+  .app .home-top-diary { padding: 12px; }
+  .app .sidebar .nav button.active { border-top-color: var(--accent); }
+}
+
+.app .diary-editor-backdrop { background: #3e37314d; }
+.app .diary-editor {
+  --editor-surface: #fffaf6;
+  --editor-muted: #f1ebe5;
+  --editor-line: #d9cec5;
+  --editor-selected: #e9e0d6;
+  --editor-outline: #998371;
+  --ring: var(--editor-outline);
+  background: var(--editor-surface);
+  color: var(--ink);
+  box-shadow: 0 25px 90px #3e373129;
+}
+.app .diary-editor .form-body { scrollbar-color: #c4b7a9 transparent; }
+.app .diary-editor .modal-footer { background: var(--editor-muted); }
+.app .diary-editor ::selection { background: var(--editor-selected); color: var(--ink); }
+.app .diary-editor .primary { box-shadow: 0 3px 5px #3e37311a; }
+.app .diary-editor :is(.modal-header p, .modal-footer > span, .field label, .field-label, .field-label svg, .date-field span, .cash-field span) {
+  color: var(--ink);
+}
+.app .diary-editor :is(.optional, .helper),
+.app .diary-editor :is(input, textarea)::placeholder { color: #756c63; }
+.app .diary-editor :is(.close, .date-field .status) {
+  background: var(--editor-muted);
+  border-color: var(--editor-line);
+  color: var(--ink);
+}
+.app .diary-editor .close:hover { background: #e6ddd4; }
+.app .diary-editor :is(.mood-option, .emotion-option, .visibility-options > button) {
+  color: var(--ink);
+  background: #fffdfb;
+  border-color: var(--editor-line);
+}
+.app .diary-editor :is(.mood-option, .emotion-option, .visibility-options > button):hover { background: var(--editor-muted); }
+.app .diary-editor :is(.mood-option, .emotion-option, .visibility-options > button)[aria-pressed="true"] {
+  color: var(--ink);
+  background: var(--editor-selected);
+  border-color: var(--editor-outline);
+  box-shadow: inset 0 0 0 1px var(--editor-outline);
+}
+.app .diary-editor :is(.mood-option, .visibility-options > button) small {
+  color: inherit;
+  opacity: 1;
+}
+.app .diary-editor :is(input:not([type="range"]), textarea, select) {
+  background: #fffdfb;
+  color: var(--ink);
+  border-color: var(--editor-line);
+}
+.app .diary-editor :is(input, textarea, select):focus {
+  border-color: var(--editor-outline) !important;
+  box-shadow: 0 0 0 3px #99837129;
+}
+.app .diary-editor :is(input[type="range"], input[type="checkbox"]) { accent-color: var(--ink); }
+.app .diary-editor :is(.sensitive-settings, .fg-inputs, .insight-field, .attachment-picker, .attachment-preview) {
+  background: var(--editor-muted);
+  border-color: var(--editor-line);
+}
+.app .diary-editor :is(.sensitive-settings > p, .sensitive-settings > label, .sensitive-settings > small) {
+  color: var(--ink);
+}
+.app .diary-editor :is(.attachment-heading, .attachment-heading svg, .attachment-heading small,
+  .attachment-count, .attachment-count > span, .attachment-picker, .attachment-picker > small,
+  .attachment-preview-open, .attachment-preview-fallback, .attachment-caption, .attachment-caption > small,
+  .attachment-remove, .attachment-help, .attachment-status) { color: var(--ink); }
+.app .diary-editor .attachment-picker:hover:not(:disabled) {
+  background: var(--editor-selected);
+  border-color: var(--editor-outline);
+}
+.app .diary-editor :is(.attachment-preview-open, .attachment-remove) {
+  background: var(--editor-surface);
+  border-color: var(--editor-line);
+  box-shadow: none;
+}
+.app .diary-editor .attachment-remove:hover:not(:disabled) {
+  background: #fff0eb;
+  border-color: #d5beb5;
+  color: #a1323c;
+}
+
+.app .community-date, .app .community-date input[type="date"] {
+  color: #000;
+  color-scheme: light;
+}
+.app .community-date input[type="date"]::-webkit-datetime-edit {
+  color: #000;
+  -webkit-text-fill-color: #000;
+}
+
+.app .author-button, .app .author-button strong { color: #686057; }
+.app .author-button small, .app .public-card-bottom > span { color: #82796f; }
+.app .public-diary-preview .public-diary-title,
+.app .public-diary-preview:hover .public-diary-title { color: #49423c; }
+.app .public-diary-preview .public-diary-excerpt,
+.app .full-diary-body { color: #6b635b; }
+.app .public-diary-preview .public-diary-read-link { color: #7c6a58; }
+.app .favorite-toggle:not(.is-favorite), .app .like-button:not(.liked), .app .close {
+  color: #8a7d6e; background: #faf6f0; border-color: #e1d8cd;
+}
+.app .favorite-toggle:not(.is-favorite):hover, .app .close:hover {
+  background: #eee5da; border-color: #cbbca9;
+}
+.app .home-overviews :is(.mood-overview strong, .mood-overview b, .mood-table strong, .emotion-total strong) { color: var(--ink); }
+.app .home-overviews :is(.mood-overview span, .mood-table > div > span, .mood-table small, .mood-table b, .mood-scale, .mood-explanation, .emotion-total > span) { color: #82776b; }
+.app .home-overviews .mood-table > div { background: #f8f4ee; border-color: #e2d9ce; }
+.app .home-overviews .mood-stacked.is-empty { background: repeating-linear-gradient(135deg,#e8e0d7,#e8e0d7 7px,#f1eae2 7px,#f1eae2 14px); }
+.app .sidebar .nav button small { background: #dfd3c6; }
+
+.app .diary-editor button.mood-option { color: var(--sentiment); }
+.app .diary-editor button.mood-option[aria-pressed="true"] {
+  color: var(--sentiment);
+  background: var(--sentiment-light);
+  border-color: var(--sentiment);
+  box-shadow: inset 0 0 0 1px var(--sentiment);
+}
+.app .diary-editor .fg-value-field { margin-top: 12px; }
+.app .diary-editor .fg-value-field input { width: 100%; }
+.app .community-edit { display: inline-flex; align-items: center; gap: 4px; min-height: 32px; padding: 5px 7px; }

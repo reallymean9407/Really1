@@ -1,0 +1,1 @@
+ALTER TABLE `journal_entries` ADD `deleted_at` text;

@@ -1,0 +1,76 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1792676147682,
+      "tag": "0000_neat_jazinda",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1792678291497,
+      "tag": "0001_skinny_multiple_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1793347750779,
+      "tag": "0002_noisy_mordo",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1794018242997,
+      "tag": "0003_yellow_serpent_society",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1794146276997,
+      "tag": "0004_puzzling_george_stacy",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1794146412477,
+      "tag": "0005_large_spencer_smythe",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1794227825923,
+      "tag": "0006_community_sharing",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1794229875494,
+      "tag": "0007_married_black_bird",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1794233327090,
+      "tag": "0008_multiple_diaries",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1794340000000,
+      "tag": "0009_diary_comments",
+      "breakpoints": true
+    }
+  ]
+}
